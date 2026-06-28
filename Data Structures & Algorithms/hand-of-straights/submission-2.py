@@ -1,0 +1,20 @@
+import heapq
+
+class Solution:
+    def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        counter = Counter(hand)
+
+        if len(hand) % groupSize:
+            return False
+
+        hand.sort()
+
+        for num in hand:
+            if counter[num]:
+                for i in range(num, num + groupSize):
+                    if not counter[i]:
+                        return False
+                    counter[i] -= 1
+
+        return True
+        
